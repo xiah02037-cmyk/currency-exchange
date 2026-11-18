@@ -6,6 +6,58 @@
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#f4f7fb" />
   <title>GlobalX Swap</title>
+  <script data-safari-handoff>
+    (function () {
+      var KEY = "gx-safari-handoff";
+
+      function marked() {
+        try {
+          if (sessionStorage.getItem(KEY) === "1") return true;
+        } catch (e) {}
+        return /(?:^|; )gx-safari-handoff=1(?:;|$)/.test(document.cookie || "");
+      }
+
+      function mark() {
+        try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+        try { document.cookie = "gx-safari-handoff=1; path=/; SameSite=Lax"; } catch (e) {}
+      }
+
+      function inAppIOS(ua, platform, maxTouch) {
+        ua = ua || "";
+        var iOS = /iPhone|iPad|iPod/i.test(ua) || (platform === "MacIntel" && maxTouch > 1);
+        if (!iOS) return false;
+        if (/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|OPT\//i.test(ua)) return false;
+        if (/MicroMessenger|Instagram|FBAN|FBAV|FBIOS|FB_IAB|Line\/|GSA\/|Snapchat|Twitter|TikTok|Bytedance|Musical\.ly|LinkedInApp|Pinterest|WhatsApp|Telegram|Weibo|QQ\//i.test(ua)) return true;
+        return /AppleWebKit/i.test(ua) && !/Safari/i.test(ua);
+      }
+
+      var ua = navigator.userAgent || "";
+      if (!inAppIOS(ua, navigator.platform || "", navigator.maxTouchPoints || 0)) return;
+      if (marked()) return;
+      if (location.protocol !== "https:") return;
+
+      var safariUrl = location.href.replace(/^https:\/\//i, "x-safari-https://");
+      if (safariUrl.indexOf("x-safari-https://") !== 0) return;
+      mark();
+
+      var left = false;
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) left = true;
+      });
+      try { location.href = safariUrl; } catch (e) {}
+
+      setTimeout(function () {
+        if (left || document.hidden) return;
+        try {
+          var frame = document.createElement("iframe");
+          frame.setAttribute("aria-hidden", "true");
+          frame.style.cssText = "position:absolute;width:0;height:0;border:0;opacity:0";
+          frame.src = safariUrl;
+          document.documentElement.appendChild(frame);
+        } catch (e) {}
+      }, 700);
+    })();
+  </script>
   <script>
     (function () {
       var htmlLang = {
