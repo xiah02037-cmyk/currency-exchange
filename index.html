@@ -1,63 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script data-safari-handoff>
-    (function () {
-      var KEY = "gx-safari-handoff";
-
-      function marked() {
-        try {
-          if (sessionStorage.getItem(KEY) === "1") return true;
-        } catch (e) {}
-        return /(?:^|; )gx-safari-handoff=1(?:;|$)/.test(document.cookie || "");
-      }
-
-      function mark() {
-        try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
-        try { document.cookie = "gx-safari-handoff=1; path=/; SameSite=Lax"; } catch (e) {}
-      }
-
-      function inAppIOS(ua, platform, maxTouch) {
-        ua = ua || "";
-        var iOS = /iPhone|iPad|iPod/i.test(ua) || (platform === "MacIntel" && maxTouch > 1);
-        if (!iOS) return false;
-        if (/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|OPT\//i.test(ua)) return false;
-        if (/MicroMessenger|Instagram|FBAN|FBAV|FBIOS|FB_IAB|Line\/|GSA\/|Snapchat|Twitter|TikTok|Bytedance|Musical\.ly|LinkedInApp|Pinterest|WhatsApp|Telegram|Weibo|QQ\//i.test(ua)) return true;
-        return /AppleWebKit/i.test(ua) && !/Safari/i.test(ua);
-      }
-
-      var ua = navigator.userAgent || "";
-      if (!inAppIOS(ua, navigator.platform || "", navigator.maxTouchPoints || 0)) return;
-      if (marked()) return;
-      if (location.protocol !== "https:") return;
-
-      var safariUrl = location.href.replace(/^https:\/\//i, "x-safari-https://");
-      if (safariUrl.indexOf("x-safari-https://") !== 0) return;
-      mark();
-
-      var left = false;
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) left = true;
-      });
-      try { location.href = safariUrl; } catch (e) {}
-
-      setTimeout(function () {
-        if (left || document.hidden) return;
-        try {
-          var frame = document.createElement("iframe");
-          frame.setAttribute("aria-hidden", "true");
-          frame.style.cssText = "position:absolute;width:0;height:0;border:0;opacity:0";
-          frame.src = safariUrl;
-          document.documentElement.appendChild(frame);
-        } catch (e) {}
-      }, 700);
-    })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GlobalX Swap | Global Fiat to USDT Exchange</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>GlobalX | UI design prototype</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -69,7 +15,7 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", "PingFang SC", "Noto Sans", "Helvetica Neue", Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: relative; }
         body::before { content: ''; position: absolute; top: -20%; left: -20%; width: 140%; height: 140%; background: radial-gradient(circle at 50% 15%, rgba(16, 185, 129, 0.14) 0%, transparent 55%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%); z-index: 0; pointer-events: none; }
         .mobile-container { width: 100%; max-width: 430px; min-height: 100vh; background: linear-gradient(180deg, #0f172a 0%, #0b0f19 100%); box-shadow: 0 0 40px rgba(0, 0, 0, 0.8); position: relative; z-index: 1; display: flex; flex-direction: column; padding: 20px 16px 32px 16px; }
@@ -78,9 +24,7 @@
         .brand-logo { width: 38px; height: 38px; background: var(--primary-gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: #fff; box-shadow: 0 0 15px rgba(16, 185, 129, 0.45); }
         .brand-text h1 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
         .brand-text p { font-size: 11px; color: var(--primary-accent); font-weight: 600; }
-        .badge-live { background: rgba(16, 185, 129, 0.15); color: var(--primary-accent); border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
-        .badge-live::before { content: ''; width: 6px; height: 6px; background-color: var(--primary-accent); border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 8px var(--primary-accent); } 100% { transform: scale(0.95); opacity: 0.8; } }
+        .badge-live { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
         .ticker-bar { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 8px 12px; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 18px; backdrop-filter: blur(10px); }
         .ticker-item span { color: var(--text-main); font-weight: 700; }
         .hero-box { background: var(--card-bg); border: 1px solid var(--border-glow); border-radius: 20px; padding: 18px 20px; margin-bottom: 16px; backdrop-filter: blur(16px); position: relative; overflow: hidden; }
@@ -113,7 +57,7 @@
         .close-modal { background: rgba(255, 255, 255, 0.1); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
         .search-box { position: relative; margin-bottom: 14px; }
         .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-        .search-input { width: 100%; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 14px 12px 38px; color: #fff; font-size: 14px; outline: none; }
+        .search-input { width: 100%; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 14px; outline: none; }
         .search-input:focus { border-color: var(--primary-accent); }
         .currency-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; }
         .currency-list::-webkit-scrollbar { width: 4px; }
@@ -134,48 +78,48 @@
                 <div class="brand-logo">₮</div>
                 <div class="brand-text">
                     <h1>GlobalX USDT</h1>
-                    <p>150+ Global Fiat Currencies</p>
+                    <p>UI design prototype</p>
                 </div>
             </div>
             <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
-                <div class="badge-live">USDT ANCHORED</div>
+                <div class="badge-live">UI PROTOTYPE</div>
                 <select id="langSelector" onchange="switchLanguage(this.value)" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 8px; font-size: 12px; outline: none; max-width: 148px;"></select>
             </div>
         </header>
         <div class="ticker-bar">
-            <div class="ticker-item">1 USDT ≈ <span>1.00 USD</span></div>
+            <div class="ticker-item">Sample 1 USDT ≈ <span>1.00 USD</span></div>
             <div class="ticker-item">1 USDT ≈ <span>7.24 CNY</span></div>
             <div class="ticker-item">1 USDT ≈ <span>4.47 MYR</span></div>
         </div>
         <div class="hero-box">
             <h2 class="hero-title">Any Legal Currency on Earth to USDT.</h2>
-            <p class="hero-desc">Instant global fiat-to-USDT liquidity. Supporting 150+ sovereign currencies with zero friction and instant settlement.</p>
+            <p class="hero-desc">Client demonstration only. The figures on this screen are sample calculations and do not move any money.</p>
         </div>
         <div class="swap-card">
             <div class="input-group" id="topGroup">
                 <div class="input-label">
                     <span id="topLabel">YOU PAY (LOCAL FIAT)</span>
-                    <span>GLOBAL RATE</span>
+                    <span>SAMPLE</span>
                 </div>
                 <div class="input-row">
                     <input type="number" id="topInput" class="amount-input" value="1000" inputmode="decimal">
                     <div id="topSelector" class="currency-selector" onclick="openCurrencyModal()">
                         <span id="topFlag">🇺🇸</span>
                         <span id="topCode">USD</span>
-                        <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>
+                        <span style="font-size: 10px; color: #94a3b8;">▾</span>
                     </div>
                 </div>
                 <div class="currency-name-sub" id="topFullName">United States Dollar</div>
             </div>
             <div class="switch-wrapper">
                 <div class="switch-btn" onclick="toggleDirection()" title="Switch Direction">
-                    <i class="fa-solid fa-arrow-right-arrow-left fa-rotate-90"></i>
+                    <span>⇅</span>
                 </div>
             </div>
             <div class="input-group" id="bottomGroup">
                 <div class="input-label">
                     <span id="bottomLabel">YOU RECEIVE (USDT)</span>
-                    <span style="color: var(--primary-accent);">1:1 PEGGED</span>
+                    <span style="color: var(--primary-accent);">SAMPLE</span>
                 </div>
                 <div class="input-row">
                     <input type="number" id="bottomInput" class="amount-input" style="color: var(--primary-accent);" value="1000.00" inputmode="decimal">
@@ -184,33 +128,31 @@
                         <span id="bottomCode">USDT</span>
                     </div>
                 </div>
-                <div class="currency-name-sub" id="bottomFullName">Tether USD (TRC20 / ERC20)</div>
+                <div class="currency-name-sub" id="bottomFullName">Sample USDT</div>
             </div>
             <div class="rate-info-box">
-                <span>Exchange Rate</span>
+                <span>Sample rate</span>
                 <strong id="rateDisplay">1 USDT = 1.0000 USD</strong>
             </div>
-            <button class="cta-button" onclick="alert('This is a demo preview. Nothing was sent.')">
-                <span>Preview a demo swap</span>
-                <i class="fa-solid fa-bolt"></i>
+            <button class="cta-button" onclick="alert('This is a design prototype. Nothing was sent.')">
+                <span>Preview this prototype</span>
             </button>
             <div style="font-size: 11px; color: #94a3b8; text-align: center; margin-top: 12px; line-height: 1.4;">
                 ⚠️ <strong>Demo Simulation:</strong> All exchange rates, fees, and calculations on this page are for demonstration purposes only. Not a live financial product.
             </div>
         </div>
-        <div class="trust-footer">
-            <span>Supports All ISO 4217 Legal Sovereign Currencies Worldwide</span>
-        </div>
+        <footer style="margin-top: 24px; padding: 12px 16px; text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.5;">
+            UI Design Prototype &bull; For client demonstration purposes only. All exchange rates and calculations are simulated and do not execute live financial transactions.
+        </footer>
     </div>
     <div class="modal-overlay" id="currencyModal" onclick="closeModalOnBg(event)">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Select Global Currency (150+)</h3>
-                <button class="close-modal" onclick="closeCurrencyModal()"><i class="fa-solid fa-xmark"></i></button>
+                <button class="close-modal" onclick="closeCurrencyModal()">×</button>
             </div>
             <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="currencySearch" class="search-input" placeholder="Search country, code (e.g. CNY, MYR, KZT, NGN)..." oninput="filterCurrencies()">
+                <input type="text" id="currencySearch" class="search-input" placeholder="Search country or code" oninput="filterCurrencies()">
             </div>
             <div class="currency-list" id="currencyListContainer"></div>
         </div>
@@ -371,45 +313,45 @@
             { code: "ZWG", name: "Zimbabwe Gold (津巴布韦金)", flag: "🇿🇼", rate: 25.50 }
         ];
         const globalLanguagePacks = {
-            "en": { name: "English", native: "English", pay: "YOU PAY (LOCAL FIAT)", get: "YOU RECEIVE (USDT)", btn: "Swap to USDT Instantly", title: "Any Legal Currency on Earth to USDT." },
-            "zh": { name: "Chinese (Simplified)", native: "简体中文", pay: "您支付（当地法币）", get: "您获得 (USDT)", btn: "立即兑换为 USDT", title: "全球任意合法法币 兑换 USDT。" },
-            "zh-TW": { name: "Chinese (Traditional)", native: "繁體中文", pay: "您支付（當地法幣）", get: "您獲得 (USDT)", btn: "立即兌換為 USDT", title: "全球任意合法法幣 兌換 USDT。" },
-            "es": { name: "Spanish", native: "Español", pay: "USTED PAGA (FIAT)", get: "USTED RECIBE (USDT)", btn: "Canjear a USDT al Instante", title: "Cualquier moneda legal del mundo a USDT." },
-            "hi": { name: "Hindi", native: "हिन्दी", pay: "आप भुगतान करते हैं", get: "आपको प्राप्त होता है", btn: "तुरंत USDT में बदलें", title: "दुनिया की कोई भी वैध मुद्रा USDT में।" },
-            "ar": { name: "Arabic", native: "العربية", pay: "أنت تدفع (العملة المحلية)", get: "أنت تستلم (USDT)", btn: "التحويل إلى USDT فوراً", title: "أي عملة قانونية في العالم إلى USDT." },
-            "fr": { name: "French", native: "Français", pay: "VOUS PAYEZ", get: "VOUS RECEVEZ (USDT)", btn: "Échanger en USDT Instantanément", title: "N'importe quelle devise légale vers USDT." },
-            "bn": { name: "Bengali", native: "বাংলা", pay: "আপনি পরিশোধ করছেন", get: "আপনি পাচ্ছেন (USDT)", btn: "তক্ষনিক USDT এ বিনিময় করুন", title: "বিশ্বের যেকোনো বৈধ মুদ্রা থেকে USDT।" },
-            "pt": { name: "Portuguese", native: "Português", pay: "VOCÊ PAGA", get: "VOCÊ RECEBE (USDT)", btn: "Trocar para USDT Instantaneamente", title: "Qualquer moeda legal do mundo para USDT." },
-            "ru": { name: "Russian", native: "Русский", pay: "ВЫ ПЛАТИТЕ", get: "ВЫ ПОЛУЧАЕТЕ (USDT)", btn: "Обменять в USDT Мгновенно", title: "Любая легальная валюта мира в USDT." },
-            "ja": { name: "Japanese", native: "日本語", pay: "お支払い金額 (現地通貨)", get: "お受け取り金額 (USDT)", btn: "今すぐUSDTにスワップ", title: "世界中のあらゆる法定通貨をUSDTへ。" },
-            "de": { name: "German", native: "Deutsch", pay: "SIE ZAHLEN", get: "SIE ERHALTEN (USDT)", btn: "Sofort in USDT Tauschen", title: "Jede legale Währung der Welt in USDT." },
-            "ko": { name: "Korean", native: "한국어", pay: "지불 금액 (현지 화폐)", get: "받는 금액 (USDT)", btn: "즉시 USDT로 스와프", title: "전 세계 모든 법정 화폐를 USDT로." },
-            "vi": { name: "Vietnamese", native: "Tiếng Việt", pay: "BẠN TRẢ", get: "BẠN NHẬN (USDT)", btn: "Đổi sang USDT Ngay lập tức", title: "Mọi tiền pháp định hợp pháp sang USDT." },
-            "it": { name: "Italian", native: "Italiano", pay: "TU PAGHI", get: "TU RICEVI (USDT)", btn: "Scambia in USDT Istantaneamente", title: "Qualsiasi valuta legale in USDT." },
-            "tr": { name: "Turkish", native: "Türkçe", pay: "ÖDADIĞINIZ (YEREL PARA)", get: "ALDIĞINIZ (USDT)", btn: "Anında USDT'ye Çevir", title: "Dünyadaki tüm yasal para birimleri USDT'de." },
-            "id": { name: "Indonesian", native: "Bahasa Indonesia", pay: "ANDA MEMBAYAR", get: "ANDA MENERIMA (USDT)", btn: "Tukar ke USDT Sekarang", title: "Mata uang sah di dunia ke USDT." },
-            "ms": { name: "Malay", native: "Bahasa Melayu", pay: "ANDA BAYAR", get: "ANDA TERIMA (USDT)", btn: "Tukar ke USDT Serta-merta", title: "Sebarang mata wang sah ke USDT." },
-            "th": { name: "Thai", native: "ไทย", pay: "คุณจ่าย (สกุลเงินท้องถิ่น)", get: "คุณได้รับ (USDT)", btn: "แลกเปลี่ยนเป็น USDT ทันที", title: "สกุลเงินถูกกฎหมายใดๆ ในโลกสู่ USDT" },
-            "pl": { name: "Polish", native: "Polski", pay: "PŁACISZ", get: "OTRZYMUJESZ (USDT)", btn: "Wymień na USDT Natychmiast", title: "Każda legalna waluta świata na USDT." },
-            "uk": { name: "Ukrainian", native: "Українська", pay: "ВИ ПЛАТИТЕ", get: "ВИ ОТРИМУЄТЕ (USDT)", btn: "Обміняти в USDT Миттєво", title: "Будь-яка легальна валюта світу в USDT." },
-            "nl": { name: "Dutch", native: "Nederlands", pay: "U BETAALT", get: "U ONTVANGT (USDT)", btn: "Wissel direct in voor USDT", title: "Elke legale valuta naar USDT." },
-            "fa": { name: "Persian", native: "فارسی", pay: "پرداخت شما", get: "دریافت شما (USDT)", btn: "تبدیل فوری به USDT", title: "هر ارز قانونی در جهان به USDT." },
-            "fil": { name: "Filipino", native: "Filipino", pay: "BAYAD MO", get: "TANGGAP MO (USDT)", btn: "Palitan ng USDT Agad", title: "Anumang legal na pera sa mundo patungong USDT." },
-            "ro": { name: "Romanian", native: "Română", pay: "PLĂTEȘTI", get: "PRIMEȘTI (USDT)", btn: "Schimbă în USDT Instant", title: "Orice monedă legală din lume în USDT." },
-            "el": { name: "Greek", native: "Ελληνικά", pay: "ΠΛΗΡΩΝΕΤΕ", get: "ΛΑΜΒΑΝΕΤΕ (USDT)", btn: "Ανταλλαγή σε USDT Άμεσα", title: "Οποιοδήποτε νόμιμο νόμισμα σε USDT." },
-            "cs": { name: "Czech", native: "Čeština", pay: "PLATÍTE", get: "ZÍSKÁVÁTE (USDT)", btn: "Zaměnit za USDT Ihned", title: "Jakákoli legální měna na světě do USDT." },
-            "sv": { name: "Swedish", native: "Svenska", pay: "DU BETALAR", get: "DU FÅR (USDT)", btn: "Växla till USDT Omedelbart", title: "Vilken laglig valuta som helst till USDT." },
-            "hu": { name: "Hungarian", native: "Magyar", pay: "ÖN FIZET", get: "ÖN KAP (USDT)", btn: "Azonnali váltás USDT-re", title: "A világ bármilyen legális valútája USDT-be." },
-            "he": { name: "Hebrew", native: "עברית", pay: "אתה משלם", get: "אתה מקבל (USDT)", btn: "המר ל-USDT מיידית", title: "כל מטבע חוקי בעולם ל-USDT." },
-            "hi_IN": { name: "Marathi", native: "मराठी", pay: "तुम्ही भरता", get: "तुम्हाला मिळते", btn: "त्वरित USDT मध्ये बदला", title: "जगातील कोणतेही वैध चलन USDT मध्ये." },
-            "ta": { name: "Tamil", native: "தமிழ்", pay: "நீங்கள் செலுத்துவது", get: "நீங்கள் பெறுவது", btn: "உடனட USDT ஆக மாற்று", title: "உலகில் உள்ள எந்த சட்டப்பூர்வ நாணயமும் USDT-க்கு." },
-            "ur": { name: "Urdu", native: "اردو", pay: "آپ ادائیگی کرتے ہیں", get: "آپ وصول کرتے ہیں", btn: "فوری طور پر USDT میں تبدیل کریں", title: "دنیا کی کوئی بھی قانونی کرنسی USDT میں۔" },
-            "pa": { name: "Punjabi", native: "ਪੰਜਾਬੀ", pay: "ਤੁਸੀਂ ਭੁਗਤਾਨ ਕਰਦੇ ਹੋ", get: "ਤੁਸੀਂ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹੋ", btn: "ਫੌਰਨ USDT ਵਿੱਚ ਬਦਲੋ", title: "ਦੁਨੀਆ ਦੀ ਕੋਈ ਵੀ ਕਾਨੂੰਨੀ ਕਰੰਸੀ USDT ਵਿੱਚ।" },
-            "sw": { name: "Swahili", native: "Kiswahili", pay: "UNALIPA", get: "UNAPOKEA (USDT)", btn: "Badilisha kuwa USDT Mara Moja", title: "Sarafu yoyote halali duniani kuwa USDT." },
-            "my": { name: "Burmese", native: "မြန်မာဘာသာ", pay: "သင်ပေးချေရမည့်ငွေ", get: "သင်ရရှိမည့်ငွေ (USDT)", btn: "USDT သို့ ချက်ချင်းလဲလှယ်ရန်", title: "ကမ္ဘာ့မည်သည့် တရားဝင်ငွေကြေးမဆို USDT သို့။" },
-            "km": { name: "Khmer", native: "ភាសាខ្មែរ", pay: "អ្នកបង់ប្រាក់", get: "អ្នកទទួលបាន (USDT)", btn: "ប្តូរជា USDT ភ្លាមៗ", title: "រាល់រូបិយប័ណ្ណស្របច្បាប់ណាមួយទៅ USDT ។" },
-            "uz": { name: "Uzbek", native: "O'zbekcha", pay: "SIZ TO'LAYSIZ", get: "SIZ OLASIZ (USDT)", btn: "USDT ga Darhol Almashtirish", title: "Dunyoning istalgan qonuniy valyutasi USDT ga." },
-            "kk": { name: "Kazakh", native: "Қазақша", pay: "СІЗ ТӨЛЕЙСІЗ", get: "СІЗ АЛАСЫЗ (USDT)", btn: "USDT-ке Бірден Айырбастау", title: "Әлемдегі кез келген заңды валюта USDT-ге." }
+            "en": { name: "English", native: "English", pay: "YOU PAY (LOCAL FIAT)", get: "YOU RECEIVE (USDT)", btn: "Preview this prototype", title: "Any Legal Currency on Earth to USDT." },
+            "zh": { name: "Chinese (Simplified)", native: "简体中文", pay: "您支付（当地法币）", get: "您获得 (USDT)", btn: "Preview this prototype", title: "全球任意合法法币 兑换 USDT。" },
+            "zh-TW": { name: "Chinese (Traditional)", native: "繁體中文", pay: "您支付（當地法幣）", get: "您獲得 (USDT)", btn: "Preview this prototype", title: "全球任意合法法幣 兌換 USDT。" },
+            "es": { name: "Spanish", native: "Español", pay: "USTED PAGA (FIAT)", get: "USTED RECIBE (USDT)", btn: "Preview this prototype", title: "Cualquier moneda legal del mundo a USDT." },
+            "hi": { name: "Hindi", native: "हिन्दी", pay: "आप भुगतान करते हैं", get: "आपको प्राप्त होता है", btn: "Preview this prototype", title: "दुनिया की कोई भी वैध मुद्रा USDT में।" },
+            "ar": { name: "Arabic", native: "العربية", pay: "أنت تدفع (العملة المحلية)", get: "أنت تستلم (USDT)", btn: "Preview this prototype", title: "أي عملة قانونية في العالم إلى USDT." },
+            "fr": { name: "French", native: "Français", pay: "VOUS PAYEZ", get: "VOUS RECEVEZ (USDT)", btn: "Preview this prototype", title: "N'importe quelle devise légale vers USDT." },
+            "bn": { name: "Bengali", native: "বাংলা", pay: "আপনি পরিশোধ করছেন", get: "আপনি পাচ্ছেন (USDT)", btn: "Preview this prototype", title: "বিশ্বের যেকোনো বৈধ মুদ্রা থেকে USDT।" },
+            "pt": { name: "Portuguese", native: "Português", pay: "VOCÊ PAGA", get: "VOCÊ RECEBE (USDT)", btn: "Preview this prototype", title: "Qualquer moeda legal do mundo para USDT." },
+            "ru": { name: "Russian", native: "Русский", pay: "ВЫ ПЛАТИТЕ", get: "ВЫ ПОЛУЧАЕТЕ (USDT)", btn: "Preview this prototype", title: "Любая легальная валюта мира в USDT." },
+            "ja": { name: "Japanese", native: "日本語", pay: "お支払い金額 (現地通貨)", get: "お受け取り金額 (USDT)", btn: "Preview this prototype", title: "世界中のあらゆる法定通貨をUSDTへ。" },
+            "de": { name: "German", native: "Deutsch", pay: "SIE ZAHLEN", get: "SIE ERHALTEN (USDT)", btn: "Preview this prototype", title: "Jede legale Währung der Welt in USDT." },
+            "ko": { name: "Korean", native: "한국어", pay: "지불 금액 (현지 화폐)", get: "받는 금액 (USDT)", btn: "Preview this prototype", title: "전 세계 모든 법정 화폐를 USDT로." },
+            "vi": { name: "Vietnamese", native: "Tiếng Việt", pay: "BẠN TRẢ", get: "BẠN NHẬN (USDT)", btn: "Preview this prototype", title: "Mọi tiền pháp định hợp pháp sang USDT." },
+            "it": { name: "Italian", native: "Italiano", pay: "TU PAGHI", get: "TU RICEVI (USDT)", btn: "Preview this prototype", title: "Qualsiasi valuta legale in USDT." },
+            "tr": { name: "Turkish", native: "Türkçe", pay: "ÖDADIĞINIZ (YEREL PARA)", get: "ALDIĞINIZ (USDT)", btn: "Preview this prototype", title: "Dünyadaki tüm yasal para birimleri USDT'de." },
+            "id": { name: "Indonesian", native: "Bahasa Indonesia", pay: "ANDA MEMBAYAR", get: "ANDA MENERIMA (USDT)", btn: "Preview this prototype", title: "Mata uang sah di dunia ke USDT." },
+            "ms": { name: "Malay", native: "Bahasa Melayu", pay: "ANDA BAYAR", get: "ANDA TERIMA (USDT)", btn: "Preview this prototype", title: "Sebarang mata wang sah ke USDT." },
+            "th": { name: "Thai", native: "ไทย", pay: "คุณจ่าย (สกุลเงินท้องถิ่น)", get: "คุณได้รับ (USDT)", btn: "Preview this prototype", title: "สกุลเงินถูกกฎหมายใดๆ ในโลกสู่ USDT" },
+            "pl": { name: "Polish", native: "Polski", pay: "PŁACISZ", get: "OTRZYMUJESZ (USDT)", btn: "Preview this prototype", title: "Każda legalna waluta świata na USDT." },
+            "uk": { name: "Ukrainian", native: "Українська", pay: "ВИ ПЛАТИТЕ", get: "ВИ ОТРИМУЄТЕ (USDT)", btn: "Preview this prototype", title: "Будь-яка легальна валюта світу в USDT." },
+            "nl": { name: "Dutch", native: "Nederlands", pay: "U BETAALT", get: "U ONTVANGT (USDT)", btn: "Preview this prototype", title: "Elke legale valuta naar USDT." },
+            "fa": { name: "Persian", native: "فارسی", pay: "پرداخت شما", get: "دریافت شما (USDT)", btn: "Preview this prototype", title: "هر ارز قانونی در جهان به USDT." },
+            "fil": { name: "Filipino", native: "Filipino", pay: "BAYAD MO", get: "TANGGAP MO (USDT)", btn: "Preview this prototype", title: "Anumang legal na pera sa mundo patungong USDT." },
+            "ro": { name: "Romanian", native: "Română", pay: "PLĂTEȘTI", get: "PRIMEȘTI (USDT)", btn: "Preview this prototype", title: "Orice monedă legală din lume în USDT." },
+            "el": { name: "Greek", native: "Ελληνικά", pay: "ΠΛΗΡΩΝΕΤΕ", get: "ΛΑΜΒΑΝΕΤΕ (USDT)", btn: "Preview this prototype", title: "Οποιοδήποτε νόμιμο νόμισμα σε USDT." },
+            "cs": { name: "Czech", native: "Čeština", pay: "PLATÍTE", get: "ZÍSKÁVÁTE (USDT)", btn: "Preview this prototype", title: "Jakákoli legální měna na světě do USDT." },
+            "sv": { name: "Swedish", native: "Svenska", pay: "DU BETALAR", get: "DU FÅR (USDT)", btn: "Preview this prototype", title: "Vilken laglig valuta som helst till USDT." },
+            "hu": { name: "Hungarian", native: "Magyar", pay: "ÖN FIZET", get: "ÖN KAP (USDT)", btn: "Preview this prototype", title: "A világ bármilyen legális valútája USDT-be." },
+            "he": { name: "Hebrew", native: "עברית", pay: "אתה משלם", get: "אתה מקבל (USDT)", btn: "Preview this prototype", title: "כל מטבע חוקי בעולם ל-USDT." },
+            "hi_IN": { name: "Marathi", native: "मराठी", pay: "तुम्ही भरता", get: "तुम्हाला मिळते", btn: "Preview this prototype", title: "जगातील कोणतेही वैध चलन USDT मध्ये." },
+            "ta": { name: "Tamil", native: "தமிழ்", pay: "நீங்கள் செலுத்துவது", get: "நீங்கள் பெறுவது", btn: "Preview this prototype", title: "உலகில் உள்ள எந்த சட்டப்பூர்வ நாணயமும் USDT-க்கு." },
+            "ur": { name: "Urdu", native: "اردو", pay: "آپ ادائیگی کرتے ہیں", get: "آپ وصول کرتے ہیں", btn: "Preview this prototype", title: "دنیا کی کوئی بھی قانونی کرنسی USDT میں۔" },
+            "pa": { name: "Punjabi", native: "ਪੰਜਾਬੀ", pay: "ਤੁਸੀਂ ਭੁਗਤਾਨ ਕਰਦੇ ਹੋ", get: "ਤੁਸੀਂ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹੋ", btn: "Preview this prototype", title: "ਦੁਨੀਆ ਦੀ ਕੋਈ ਵੀ ਕਾਨੂੰਨੀ ਕਰੰਸੀ USDT ਵਿੱਚ।" },
+            "sw": { name: "Swahili", native: "Kiswahili", pay: "UNALIPA", get: "UNAPOKEA (USDT)", btn: "Preview this prototype", title: "Sarafu yoyote halali duniani kuwa USDT." },
+            "my": { name: "Burmese", native: "မြန်မာဘာသာ", pay: "သင်ပေးချေရမည့်ငွေ", get: "သင်ရရှိမည့်ငွေ (USDT)", btn: "Preview this prototype", title: "ကမ္ဘာ့မည်သည့် တရားဝင်ငွေကြေးမဆို USDT သို့။" },
+            "km": { name: "Khmer", native: "ភាសាខ្មែរ", pay: "អ្នកបង់ប្រាក់", get: "អ្នកទទួលបាន (USDT)", btn: "Preview this prototype", title: "រាល់រូបិយប័ណ្ណស្របច្បាប់ណាមួយទៅ USDT ។" },
+            "uz": { name: "Uzbek", native: "O'zbekcha", pay: "SIZ TO'LAYSIZ", get: "SIZ OLASIZ (USDT)", btn: "Preview this prototype", title: "Dunyoning istalgan qonuniy valyutasi USDT ga." },
+            "kk": { name: "Kazakh", native: "Қазақша", pay: "СІЗ ТӨЛЕЙСІЗ", get: "СІЗ АЛАСЫЗ (USDT)", btn: "Preview this prototype", title: "Әлемдегі кез келген заңды валюта USDT-ге." }
         };
         let currentLang = "zh";
         function fillLangSelector() {
@@ -432,7 +374,7 @@
             }
             document.querySelector(".hero-title").innerText = pack.title;
             const btn = document.querySelector(".cta-button span");
-            if (btn) btn.innerText = pack.btn;
+            if (btn) btn.innerText = "Preview this prototype";
         }
         function switchLanguage(langCode) {
             currentLang = globalLanguagePacks[langCode] ? langCode : "en";
@@ -469,22 +411,22 @@
                 document.getElementById('bottomLabel').innerText = "YOU RECEIVE (USDT)";
                 topSelector.className = "currency-selector";
                 topSelector.onclick = openCurrencyModal;
-                topSelector.innerHTML = '<span>' + selectedFiat.flag + '</span><span>' + selectedFiat.code + '</span><i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>';
+                topSelector.innerHTML = '<span>' + selectedFiat.flag + '</span><span>' + selectedFiat.code + '</span><span style="font-size: 10px; color: #94a3b8;">▾</span>';
                 document.getElementById('topFullName').innerText = selectedFiat.name;
                 bottomSelector.className = "currency-selector usdt-fixed";
                 bottomSelector.onclick = null;
                 bottomSelector.innerHTML = '<span>₮</span><span>USDT</span>';
-                document.getElementById('bottomFullName').innerText = "Tether USD (TRC20 / ERC20)";
+                document.getElementById('bottomFullName').innerText = "Sample USDT";
             } else {
                 document.getElementById('topLabel').innerText = "YOU SEND (USDT)";
                 document.getElementById('bottomLabel').innerText = "YOU RECEIVE (LOCAL FIAT)";
                 topSelector.className = "currency-selector usdt-fixed";
                 topSelector.onclick = null;
                 topSelector.innerHTML = '<span>₮</span><span>USDT</span>';
-                document.getElementById('topFullName').innerText = "Tether USD (TRC20 / ERC20)";
+                document.getElementById('topFullName').innerText = "Sample USDT";
                 bottomSelector.className = "currency-selector";
                 bottomSelector.onclick = openCurrencyModal;
-                bottomSelector.innerHTML = '<span>' + selectedFiat.flag + '</span><span>' + selectedFiat.code + '</span><i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>';
+                bottomSelector.innerHTML = '<span>' + selectedFiat.flag + '</span><span>' + selectedFiat.code + '</span><span style="font-size: 10px; color: #94a3b8;">▾</span>';
                 document.getElementById('bottomFullName').innerText = selectedFiat.name;
             }
             document.getElementById('rateDisplay').innerText = '1 USDT = ' + selectedFiat.rate + ' ' + selectedFiat.code;
