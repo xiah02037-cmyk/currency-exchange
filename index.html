@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f3f6fb">
+  <title>探索全球货币兑换</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      try {
+        var manual = localStorage.getItem("fx-lang-manual");
+        var saved = localStorage.getItem("fx-lang");
+        var nav = (navigator.language || "").toLowerCase();
+        var lang = (manual === "zh" || manual === "en") ? manual : (saved === "zh" || saved === "en") ? saved : (nav.indexOf("zh") === 0 ? "zh" : "en");
+        document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
+        document.documentElement.setAttribute("data-lang", lang);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <noscript>
+    <div class="phone noscript-phone">
+      <p>请启用 JavaScript 查看本页。<br>Enable JavaScript to view this page.</p>
+    </div>
+  </noscript>
+  <div class="phone" id="app">
+    <header class="hero">
+      <div class="hero-media" id="heroMedia">
+        <!-- SWAP HERO PHOTO HERE: replace the inline SVG inside .hero-media with the final FX photo (currency, rate board, passport, airport, or city skyline). You can instead set background-image on .hero-media and delete the SVG. Keep .hero-overlay so the light wash stays and the text remains readable. -->
+        <svg class="hero-art" viewBox="0 0 390 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c5dff2"/>
+              <stop offset="0.55" stop-color="#e7f3fb"/>
+              <stop offset="1" stop-color="#f7fbfe"/>
+            </linearGradient>
+          </defs>
+          <rect width="390" height="300" fill="url(#sky)"/>
+          <circle cx="318" cy="48" r="22" fill="#fff6e4"/>
+          <g fill="#ffffff">
+            <ellipse cx="78" cy="42" rx="36" ry="14" opacity="0.95"/>
+            <ellipse cx="104" cy="38" rx="22" ry="12" opacity="0.95"/>
+            <ellipse cx="210" cy="58" rx="42" ry="13" opacity="0.8"/>
+          </g>
+          <g fill="#8fb4cc" opacity="0.55" font-family="Georgia, serif" font-size="28">
+            <text x="18" y="78">$</text>
+            <text x="168" y="34">€</text>
+            <text x="246" y="86">£</text>
+            <text x="348" y="78">¥</text>
+          </g>
+          <path d="M292 44 l22 6 -6 4 -6 -1 -2 7 -4 -1 1 -7 -8 -3 z" fill="#7f97ab"/>
+          <g fill="#6f8ea3">
+            <rect x="0" y="168" width="34" height="70"/>
+            <rect x="34" y="138" width="26" height="100"/>
+            <rect x="60" y="154" width="30" height="84"/>
+            <rect x="90" y="118" width="22" height="120"/>
+            <rect x="112" y="146" width="36" height="92"/>
+            <rect x="148" y="126" width="18" height="112"/>
+            <rect x="166" y="104" width="24" height="134"/>
+            <rect x="190" y="132" width="40" height="106"/>
+            <rect x="230" y="150" width="28" height="88"/>
+            <rect x="258" y="122" width="22" height="116"/>
+            <rect x="280" y="156" width="46" height="82"/>
+            <rect x="326" y="140" width="30" height="98"/>
+            <rect x="356" y="162" width="34" height="76"/>
+          </g>
+          <g fill="#e7f2f8">
+            <rect x="42" y="150" width="6" height="6"/>
+            <rect x="52" y="150" width="6" height="6"/>
+            <rect x="42" y="162" width="6" height="6"/>
+            <rect x="98" y="132" width="5" height="5"/>
+            <rect x="174" y="118" width="5" height="5"/>
+            <rect x="174" y="130" width="5" height="5"/>
+            <rect x="200" y="146" width="6" height="6"/>
+            <rect x="212" y="146" width="6" height="6"/>
+            <rect x="266" y="136" width="5" height="5"/>
+            <rect x="334" y="154" width="6" height="6"/>
+          </g>
+          <rect x="174" y="78" width="8" height="28" fill="#7f97ab"/>
+          <rect x="168" y="70" width="20" height="10" rx="2" fill="#7f97ab"/>
+          <g transform="translate(18,96)">
+            <rect width="78" height="102" rx="8" fill="#f7f1e4" stroke="#d9c7a4"/>
+            <circle cx="39" cy="42" r="14" fill="none" stroke="#c4a36a" stroke-width="2"/>
+            <rect x="20" y="66" width="38" height="4" rx="2" fill="#e4d3b8"/>
+            <rect x="26" y="76" width="26" height="4" rx="2" fill="#e4d3b8"/>
+          </g>
+          <g transform="translate(292,108)">
+            <rect width="82" height="78" rx="8" fill="#ffffff" opacity="0.94"/>
+            <rect x="10" y="14" width="40" height="6" rx="3" fill="#b7d0c4"/>
+            <rect x="10" y="28" width="62" height="6" rx="3" fill="#8eabc0"/>
+            <rect x="10" y="42" width="34" height="6" rx="3" fill="#e2c09a"/>
+            <rect x="10" y="56" width="50" height="6" rx="3" fill="#8eabc0"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-kicker">
+          <p class="index">01</p>
+          <p class="eyebrow" data-i18n="heroEyebrow"></p>
+        </div>
+        <h1 data-i18n="heroTitle"></h1>
+        <p class="theme-label" data-i18n="themeLabel"></p>
+        <p class="theme" id="themeLine">探索全球货币兑换，根据事实汇率</p>
+        <p class="lead" data-i18n="heroLead"></p>
+        <div class="card">
+          <p class="pill" data-i18n="demoKicker"></p>
+          <p class="note" data-i18n="demoNote"></p>
+          <form id="demoForm" autocomplete="off" novalidate>
+            <label for="amount" data-i18n="amountLabel"></label>
+            <input id="amount" type="number" inputmode="decimal" min="0" max="1000000000" step="0.01" value="1000" autocomplete="off">
+            <div class="pair">
+              <div>
+                <label for="fromCcy" data-i18n="fromLabel"></label>
+                <select id="fromCcy"></select>
+              </div>
+              <div>
+                <label for="toCcy" data-i18n="toLabel"></label>
+                <select id="toCcy"></select>
+              </div>
+            </div>
+            <p class="pair-line" id="pairLine"></p>
+            <p class="field-label" id="scenarioLabel" data-i18n="scenarioLabel"></p>
+            <div class="seg" role="group" aria-labelledby="scenarioLabel">
+              <button type="button" data-pct="1">1%</button>
+              <button type="button" data-pct="3">3%</button>
+              <button type="button" data-pct="8">8%</button>
+            </div>
+            <p class="hint" data-i18n="scenarioHint"></p>
+            <div id="mathBlock">
+              <div class="figures">
+                <div>
+                  <p class="mini" data-i18n="keepKicker"></p>
+                  <p class="figure keep"><span id="keepValue">0</span> <span id="keepUnit"></span></p>
+                </div>
+                <div>
+                  <p class="mini" data-i18n="gapKicker"></p>
+                  <p class="figure gap"><span id="gapValue">0</span> <span id="gapUnit"></span></p>
+                </div>
+              </div>
+              <div class="split" aria-hidden="true"><span id="keepBar"></span><span id="gapBar"></span></div>
+              <p class="gap-caption" id="gapCaption" aria-live="polite"></p>
+              <p class="noquote" id="noQuote"></p>
+            </div>
+            <p class="same" id="sameMsg" hidden></p>
+            <p class="claim" data-i18n="claimLine"></p>
+          </form>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="block" id="explainer">
+        <p class="index">02</p>
+        <h2 data-i18n="explainerTitle"></h2>
+        <p class="lead" data-i18n="explainerLead"></p>
+        <div id="factList"></div>
+        <h3 class="subhead" data-i18n="arrivalTitle"></h3>
+        <div id="rails"></div>
+        <article class="card">
+          <h3 data-i18n="feeTitle"></h3>
+          <p data-i18n="feeBody"></p>
+        </article>
+        <article class="card lock-card">
+          <h3 data-i18n="lockTitle"></h3>
+          <p data-i18n="lockBody"></p>
+        </article>
+      </section>
+      <section class="block compare" id="compare">
+        <p class="index">03</p>
+        <h2 data-i18n="compareTitle"></h2>
+        <p class="lead" data-i18n="compareLead"></p>
+        <ul class="pains" id="pains"></ul>
+        <p class="scale" data-i18n="compareScale"></p>
+        <ol class="legend" id="tickLegend"></ol>
+        <div id="rows"></div>
+        <p class="footnote" data-i18n="compareFoot"></p>
+      </section>
+      <section class="block" id="wall">
+        <p class="index">04</p>
+        <h2 data-i18n="wallTitle"></h2>
+        <p class="lead" data-i18n="wallLead"></p>
+        <div class="wall-wrap">
+          <div class="scroller" id="wallScroll"></div>
+        </div>
+        <article class="card wall-detail" id="wallDetail"></article>
+      </section>
+      <section class="block" id="steps">
+        <p class="index">05</p>
+        <h2 data-i18n="stepsTitle"></h2>
+        <ol class="step-list" id="stepList"></ol>
+      </section>
+      <section class="block" id="points">
+        <p class="index">06</p>
+        <h2 data-i18n="pointsTitle"></h2>
+        <div id="pointList"></div>
+        <article class="card safety">
+          <h3 data-i18n="safetyTitle"></h3>
+          <p data-i18n="safetyBody"></p>
+          <ul id="safetyList"></ul>
+        </article>
+      </section>
+      <section class="block" id="faq">
+        <p class="index">07</p>
+        <h2 data-i18n="faqTitle"></h2>
+        <div id="faqList"></div>
+      </section>
+    </main>
+    <footer class="block lang-block">
+      <p class="index">08</p>
+      <p class="closing" data-i18n="closing"></p>
+      <h2 id="langTitle" data-i18n="langTitle"></h2>
+      <div class="lang-row" role="group" aria-labelledby="langTitle">
+        <button type="button" id="btnZh" data-pick="zh" data-i18n="langZh">中文</button>
+        <button type="button" id="btnEn" data-pick="en" data-i18n="langEn">English</button>
+      </div>
+      <p class="lang-status" id="langStatus" role="status"></p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
