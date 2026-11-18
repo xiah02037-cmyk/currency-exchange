@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#f3f6fb">
-  <title>探索全球货币兑换</title>
+  <title>Explore factual currency exchange</title>
   <link rel="stylesheet" href="styles.css">
   <script>
     (function () {
+      var htmlLang = {
+        en: "en", "zh-CN": "zh-Hans", "zh-TW": "zh-Hant", es: "es", ja: "ja", ko: "ko",
+        ru: "ru", de: "de", fr: "fr", pt: "pt", ar: "ar", hi: "hi", tr: "tr",
+        vi: "vi", th: "th", it: "it", pl: "pl", uk: "uk", nl: "nl", id: "id"
+      };
       try {
         var manual = localStorage.getItem("fx-lang-manual");
-        var saved = localStorage.getItem("fx-lang");
-        var nav = (navigator.language || "").toLowerCase();
-        var lang = (manual === "zh" || manual === "en") ? manual : (saved === "zh" || saved === "en") ? saved : (nav.indexOf("zh") === 0 ? "zh" : "en");
-        document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
-        document.documentElement.setAttribute("data-lang", lang);
+        if (manual === "zh") manual = "zh-CN";
+        if (!htmlLang[manual]) return;
+        document.documentElement.lang = htmlLang[manual];
+        document.documentElement.dir = manual === "ar" ? "rtl" : "ltr";
+        document.documentElement.setAttribute("data-lang", manual);
       } catch (e) {}
     })();
   </script>
@@ -27,6 +32,19 @@
     </div>
   </noscript>
   <div class="phone" id="app">
+    <div class="lang-bar" id="langBar">
+      <button type="button" class="lang-toggle" id="langToggle" aria-expanded="false" aria-controls="langPanel" aria-haspopup="listbox">
+        <span class="lang-toggle-kicker" data-i18n="langTitle"></span>
+        <span class="lang-toggle-name" id="langCurrent"></span>
+        <span class="lang-chev" aria-hidden="true"></span>
+      </button>
+      <p class="lang-status" id="langStatus" role="status"></p>
+      <div class="lang-panel" id="langPanel" aria-hidden="true">
+        <div class="lang-panel-inner">
+          <div class="lang-list" id="langList" role="listbox" aria-labelledby="langToggle"></div>
+        </div>
+      </div>
+    </div>
     <header class="hero">
       <div class="hero-media" id="heroMedia">
         <!-- SWAP HERO PHOTO HERE: replace the inline SVG inside .hero-media with the final FX photo (currency, rate board, passport, airport, or city skyline). You can instead set background-image on .hero-media and delete the SVG. Keep .hero-overlay so the light wash stays and the text remains readable. -->
@@ -104,7 +122,7 @@
         </div>
         <h1 data-i18n="heroTitle"></h1>
         <p class="theme-label" data-i18n="themeLabel"></p>
-        <p class="theme" id="themeLine">探索全球货币兑换，根据事实汇率</p>
+        <p class="theme" id="themeLine" data-i18n="themeLine"></p>
         <p class="lead" data-i18n="heroLead"></p>
         <div class="card">
           <p class="pill" data-i18n="demoKicker"></p>
@@ -211,14 +229,9 @@
     <footer class="block lang-block">
       <p class="index">08</p>
       <p class="closing" data-i18n="closing"></p>
-      <h2 id="langTitle" data-i18n="langTitle"></h2>
-      <div class="lang-row" role="group" aria-labelledby="langTitle">
-        <button type="button" id="btnZh" data-pick="zh" data-i18n="langZh">中文</button>
-        <button type="button" id="btnEn" data-pick="en" data-i18n="langEn">English</button>
-      </div>
-      <p class="lang-status" id="langStatus" role="status"></p>
     </footer>
   </div>
+  <script src="packs.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
