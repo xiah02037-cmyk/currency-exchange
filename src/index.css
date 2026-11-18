@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --ink: #102033;
+  --trust: #184e9e;
+  --gain: #0c8a5a;
+  --gold: #a67c2d;
+}
+
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--ink);
+  background: #e7edf5;
+  font-family: "PingFang SC", "PingFang TC", "Hiragino Sans", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Naskh Arabic", "Noto Sans Arabic", "Noto Sans Devanagari", "Noto Sans Thai", "Segoe UI", "Helvetica Neue", "Geeza Pro", "Thonburi", "Leelawadee UI", sans-serif;
+}
+
+button, input, select { font-family: inherit; }
+
+button { touch-action: manipulation; }
+
+.ticker-track {
+  animation: ticker 22s linear infinite;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes floaty {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -10px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
