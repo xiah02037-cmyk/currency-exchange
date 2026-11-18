@@ -137,7 +137,10 @@
                     <p>150+ Global Fiat Currencies</p>
                 </div>
             </div>
-            <div class="badge-live">USDT ANCHORED</div>
+            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+                <div class="badge-live">USDT ANCHORED</div>
+                <select id="langSelector" onchange="switchLanguage(this.value)" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 8px; font-size: 12px; outline: none; max-width: 148px;"></select>
+            </div>
         </header>
         <div class="ticker-bar">
             <div class="ticker-item">1 USDT ≈ <span>1.00 USD</span></div>
@@ -367,6 +370,77 @@
             { code: "SHP", name: "Saint Helena Pound (圣赫勒拿镑)", flag: "🇸🇭", rate: 0.79 },
             { code: "ZWG", name: "Zimbabwe Gold (津巴布韦金)", flag: "🇿🇼", rate: 25.50 }
         ];
+        const globalLanguagePacks = {
+            "en": { name: "English", native: "English", pay: "YOU PAY (LOCAL FIAT)", get: "YOU RECEIVE (USDT)", btn: "Swap to USDT Instantly", title: "Any Legal Currency on Earth to USDT." },
+            "zh": { name: "Chinese (Simplified)", native: "简体中文", pay: "您支付（当地法币）", get: "您获得 (USDT)", btn: "立即兑换为 USDT", title: "全球任意合法法币 兑换 USDT。" },
+            "zh-TW": { name: "Chinese (Traditional)", native: "繁體中文", pay: "您支付（當地法幣）", get: "您獲得 (USDT)", btn: "立即兌換為 USDT", title: "全球任意合法法幣 兌換 USDT。" },
+            "es": { name: "Spanish", native: "Español", pay: "USTED PAGA (FIAT)", get: "USTED RECIBE (USDT)", btn: "Canjear a USDT al Instante", title: "Cualquier moneda legal del mundo a USDT." },
+            "hi": { name: "Hindi", native: "हिन्दी", pay: "आप भुगतान करते हैं", get: "आपको प्राप्त होता है", btn: "तुरंत USDT में बदलें", title: "दुनिया की कोई भी वैध मुद्रा USDT में।" },
+            "ar": { name: "Arabic", native: "العربية", pay: "أنت تدفع (العملة المحلية)", get: "أنت تستلم (USDT)", btn: "التحويل إلى USDT فوراً", title: "أي عملة قانونية في العالم إلى USDT." },
+            "fr": { name: "French", native: "Français", pay: "VOUS PAYEZ", get: "VOUS RECEVEZ (USDT)", btn: "Échanger en USDT Instantanément", title: "N'importe quelle devise légale vers USDT." },
+            "bn": { name: "Bengali", native: "বাংলা", pay: "আপনি পরিশোধ করছেন", get: "আপনি পাচ্ছেন (USDT)", btn: "তক্ষনিক USDT এ বিনিময় করুন", title: "বিশ্বের যেকোনো বৈধ মুদ্রা থেকে USDT।" },
+            "pt": { name: "Portuguese", native: "Português", pay: "VOCÊ PAGA", get: "VOCÊ RECEBE (USDT)", btn: "Trocar para USDT Instantaneamente", title: "Qualquer moeda legal do mundo para USDT." },
+            "ru": { name: "Russian", native: "Русский", pay: "ВЫ ПЛАТИТЕ", get: "ВЫ ПОЛУЧАЕТЕ (USDT)", btn: "Обменять в USDT Мгновенно", title: "Любая легальная валюта мира в USDT." },
+            "ja": { name: "Japanese", native: "日本語", pay: "お支払い金額 (現地通貨)", get: "お受け取り金額 (USDT)", btn: "今すぐUSDTにスワップ", title: "世界中のあらゆる法定通貨をUSDTへ。" },
+            "de": { name: "German", native: "Deutsch", pay: "SIE ZAHLEN", get: "SIE ERHALTEN (USDT)", btn: "Sofort in USDT Tauschen", title: "Jede legale Währung der Welt in USDT." },
+            "ko": { name: "Korean", native: "한국어", pay: "지불 금액 (현지 화폐)", get: "받는 금액 (USDT)", btn: "즉시 USDT로 스와프", title: "전 세계 모든 법정 화폐를 USDT로." },
+            "vi": { name: "Vietnamese", native: "Tiếng Việt", pay: "BẠN TRẢ", get: "BẠN NHẬN (USDT)", btn: "Đổi sang USDT Ngay lập tức", title: "Mọi tiền pháp định hợp pháp sang USDT." },
+            "it": { name: "Italian", native: "Italiano", pay: "TU PAGHI", get: "TU RICEVI (USDT)", btn: "Scambia in USDT Istantaneamente", title: "Qualsiasi valuta legale in USDT." },
+            "tr": { name: "Turkish", native: "Türkçe", pay: "ÖDADIĞINIZ (YEREL PARA)", get: "ALDIĞINIZ (USDT)", btn: "Anında USDT'ye Çevir", title: "Dünyadaki tüm yasal para birimleri USDT'de." },
+            "id": { name: "Indonesian", native: "Bahasa Indonesia", pay: "ANDA MEMBAYAR", get: "ANDA MENERIMA (USDT)", btn: "Tukar ke USDT Sekarang", title: "Mata uang sah di dunia ke USDT." },
+            "ms": { name: "Malay", native: "Bahasa Melayu", pay: "ANDA BAYAR", get: "ANDA TERIMA (USDT)", btn: "Tukar ke USDT Serta-merta", title: "Sebarang mata wang sah ke USDT." },
+            "th": { name: "Thai", native: "ไทย", pay: "คุณจ่าย (สกุลเงินท้องถิ่น)", get: "คุณได้รับ (USDT)", btn: "แลกเปลี่ยนเป็น USDT ทันที", title: "สกุลเงินถูกกฎหมายใดๆ ในโลกสู่ USDT" },
+            "pl": { name: "Polish", native: "Polski", pay: "PŁACISZ", get: "OTRZYMUJESZ (USDT)", btn: "Wymień na USDT Natychmiast", title: "Każda legalna waluta świata na USDT." },
+            "uk": { name: "Ukrainian", native: "Українська", pay: "ВИ ПЛАТИТЕ", get: "ВИ ОТРИМУЄТЕ (USDT)", btn: "Обміняти в USDT Миттєво", title: "Будь-яка легальна валюта світу в USDT." },
+            "nl": { name: "Dutch", native: "Nederlands", pay: "U BETAALT", get: "U ONTVANGT (USDT)", btn: "Wissel direct in voor USDT", title: "Elke legale valuta naar USDT." },
+            "fa": { name: "Persian", native: "فارسی", pay: "پرداخت شما", get: "دریافت شما (USDT)", btn: "تبدیل فوری به USDT", title: "هر ارز قانونی در جهان به USDT." },
+            "fil": { name: "Filipino", native: "Filipino", pay: "BAYAD MO", get: "TANGGAP MO (USDT)", btn: "Palitan ng USDT Agad", title: "Anumang legal na pera sa mundo patungong USDT." },
+            "ro": { name: "Romanian", native: "Română", pay: "PLĂTEȘTI", get: "PRIMEȘTI (USDT)", btn: "Schimbă în USDT Instant", title: "Orice monedă legală din lume în USDT." },
+            "el": { name: "Greek", native: "Ελληνικά", pay: "ΠΛΗΡΩΝΕΤΕ", get: "ΛΑΜΒΑΝΕΤΕ (USDT)", btn: "Ανταλλαγή σε USDT Άμεσα", title: "Οποιοδήποτε νόμιμο νόμισμα σε USDT." },
+            "cs": { name: "Czech", native: "Čeština", pay: "PLATÍTE", get: "ZÍSKÁVÁTE (USDT)", btn: "Zaměnit za USDT Ihned", title: "Jakákoli legální měna na světě do USDT." },
+            "sv": { name: "Swedish", native: "Svenska", pay: "DU BETALAR", get: "DU FÅR (USDT)", btn: "Växla till USDT Omedelbart", title: "Vilken laglig valuta som helst till USDT." },
+            "hu": { name: "Hungarian", native: "Magyar", pay: "ÖN FIZET", get: "ÖN KAP (USDT)", btn: "Azonnali váltás USDT-re", title: "A világ bármilyen legális valútája USDT-be." },
+            "he": { name: "Hebrew", native: "עברית", pay: "אתה משלם", get: "אתה מקבל (USDT)", btn: "המר ל-USDT מיידית", title: "כל מטבע חוקי בעולם ל-USDT." },
+            "hi_IN": { name: "Marathi", native: "मराठी", pay: "तुम्ही भरता", get: "तुम्हाला मिळते", btn: "त्वरित USDT मध्ये बदला", title: "जगातील कोणतेही वैध चलन USDT मध्ये." },
+            "ta": { name: "Tamil", native: "தமிழ்", pay: "நீங்கள் செலுத்துவது", get: "நீங்கள் பெறுவது", btn: "உடனட USDT ஆக மாற்று", title: "உலகில் உள்ள எந்த சட்டப்பூர்வ நாணயமும் USDT-க்கு." },
+            "ur": { name: "Urdu", native: "اردو", pay: "آپ ادائیگی کرتے ہیں", get: "آپ وصول کرتے ہیں", btn: "فوری طور پر USDT میں تبدیل کریں", title: "دنیا کی کوئی بھی قانونی کرنسی USDT میں۔" },
+            "pa": { name: "Punjabi", native: "ਪੰਜਾਬੀ", pay: "ਤੁਸੀਂ ਭੁਗਤਾਨ ਕਰਦੇ ਹੋ", get: "ਤੁਸੀਂ ਪ੍ਰਾਪਤ ਕਰਦੇ ਹੋ", btn: "ਫੌਰਨ USDT ਵਿੱਚ ਬਦਲੋ", title: "ਦੁਨੀਆ ਦੀ ਕੋਈ ਵੀ ਕਾਨੂੰਨੀ ਕਰੰਸੀ USDT ਵਿੱਚ।" },
+            "sw": { name: "Swahili", native: "Kiswahili", pay: "UNALIPA", get: "UNAPOKEA (USDT)", btn: "Badilisha kuwa USDT Mara Moja", title: "Sarafu yoyote halali duniani kuwa USDT." },
+            "my": { name: "Burmese", native: "မြန်မာဘာသာ", pay: "သင်ပေးချေရမည့်ငွေ", get: "သင်ရရှိမည့်ငွေ (USDT)", btn: "USDT သို့ ချက်ချင်းလဲလှယ်ရန်", title: "ကမ္ဘာ့မည်သည့် တရားဝင်ငွေကြေးမဆို USDT သို့။" },
+            "km": { name: "Khmer", native: "ភាសាខ្មែរ", pay: "អ្នកបង់ប្រាក់", get: "អ្នកទទួលបាន (USDT)", btn: "ប្តូរជា USDT ភ្លាមៗ", title: "រាល់រូបិយប័ណ្ណស្របច្បាប់ណាមួយទៅ USDT ។" },
+            "uz": { name: "Uzbek", native: "O'zbekcha", pay: "SIZ TO'LAYSIZ", get: "SIZ OLASIZ (USDT)", btn: "USDT ga Darhol Almashtirish", title: "Dunyoning istalgan qonuniy valyutasi USDT ga." },
+            "kk": { name: "Kazakh", native: "Қазақша", pay: "СІЗ ТӨЛЕЙСІЗ", get: "СІЗ АЛАСЫЗ (USDT)", btn: "USDT-ке Бірден Айырбастау", title: "Әлемдегі кез келген заңды валюта USDT-ге." }
+        };
+        let currentLang = "zh";
+        function fillLangSelector() {
+            const sel = document.getElementById("langSelector");
+            sel.innerHTML = "";
+            Object.keys(globalLanguagePacks).forEach(function (code) {
+                const opt = document.createElement("option");
+                opt.value = code;
+                opt.textContent = globalLanguagePacks[code].native;
+                opt.style.background = "#111";
+                if (code === currentLang) opt.selected = true;
+                sel.appendChild(opt);
+            });
+        }
+        function applyLanguage() {
+            const pack = globalLanguagePacks[currentLang] || globalLanguagePacks.en;
+            if (isFiatToUsdt) {
+                document.getElementById("topLabel").innerText = pack.pay;
+                document.getElementById("bottomLabel").innerText = pack.get;
+            }
+            document.querySelector(".hero-title").innerText = pack.title;
+            const btn = document.querySelector(".cta-button span");
+            if (btn) btn.innerText = pack.btn;
+        }
+        function switchLanguage(langCode) {
+            currentLang = globalLanguagePacks[langCode] ? langCode : "en";
+            const rtl = currentLang === "ar" || currentLang === "fa" || currentLang === "he" || currentLang === "ur";
+            document.documentElement.dir = rtl ? "rtl" : "ltr";
+            document.documentElement.lang = currentLang === "zh" ? "zh-Hans" : currentLang;
+            applyLanguage();
+        }
         let selectedFiat = globalCurrencies[0];
         let isFiatToUsdt = true;
         const topInput = document.getElementById('topInput');
@@ -414,6 +488,7 @@
                 document.getElementById('bottomFullName').innerText = selectedFiat.name;
             }
             document.getElementById('rateDisplay').innerText = '1 USDT = ' + selectedFiat.rate + ' ' + selectedFiat.code;
+            applyLanguage();
         }
         function calculateFromTop() {
             const val = parseFloat(topInput.value);
@@ -438,6 +513,8 @@
         bottomInput.addEventListener('input', calculateFromBottom);
         updateUIHeaders();
         calculateFromTop();
+        fillLangSelector();
+        switchLanguage("zh");
     </script>
 </body>
 </html>
