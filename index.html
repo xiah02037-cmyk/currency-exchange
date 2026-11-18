@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="light" />
-  <meta name="theme-color" content="#f4f7fb" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0b0f19" />
   <title>GlobalX Swap</title>
   <script data-safari-handoff>
     (function () {
@@ -56,22 +56,6 @@
           document.documentElement.appendChild(frame);
         } catch (e) {}
       }, 700);
-    })();
-  </script>
-  <script>
-    (function () {
-      var htmlLang = {
-        en: "en", "zh-CN": "zh-Hans", "zh-TW": "zh-Hant", es: "es", ja: "ja", ko: "ko",
-        ru: "ru", de: "de", fr: "fr", pt: "pt", ar: "ar", hi: "hi", tr: "tr",
-        vi: "vi", th: "th", it: "it", pl: "pl", uk: "uk", nl: "nl", id: "id"
-      };
-      try {
-        var manual = localStorage.getItem("gx-lang-manual") || localStorage.getItem("fx-lang-manual");
-        if (manual === "zh") manual = "zh-CN";
-        if (!htmlLang[manual]) return;
-        document.documentElement.lang = htmlLang[manual];
-        document.documentElement.dir = manual === "ar" ? "rtl" : "ltr";
-      } catch (e) {}
     })();
   </script>
 </head>
