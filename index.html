@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="#0b0f19" />
-  <title>GlobalX Swap</title>
-  <script data-safari-handoff>
+    <script data-safari-handoff>
     (function () {
       var KEY = "gx-safari-handoff";
 
@@ -57,11 +52,389 @@
         } catch (e) {}
       }, 700);
     })();
-  </script>
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GlobalX Swap | Global Fiat to USDT Exchange</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(18, 24, 38, 0.8);
+            --border-glow: rgba(16, 185, 129, 0.35);
+            --primary-accent: #10b981;
+            --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --blue-accent: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: relative; }
+        body::before { content: ''; position: absolute; top: -20%; left: -20%; width: 140%; height: 140%; background: radial-gradient(circle at 50% 15%, rgba(16, 185, 129, 0.14) 0%, transparent 55%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%); z-index: 0; pointer-events: none; }
+        .mobile-container { width: 100%; max-width: 430px; min-height: 100vh; background: linear-gradient(180deg, #0f172a 0%, #0b0f19 100%); box-shadow: 0 0 40px rgba(0, 0, 0, 0.8); position: relative; z-index: 1; display: flex; flex-direction: column; padding: 20px 16px 32px 16px; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand-logo { width: 38px; height: 38px; background: var(--primary-gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: #fff; box-shadow: 0 0 15px rgba(16, 185, 129, 0.45); }
+        .brand-text h1 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
+        .brand-text p { font-size: 11px; color: var(--primary-accent); font-weight: 600; }
+        .badge-live { background: rgba(16, 185, 129, 0.15); color: var(--primary-accent); border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .badge-live::before { content: ''; width: 6px; height: 6px; background-color: var(--primary-accent); border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 8px var(--primary-accent); } 100% { transform: scale(0.95); opacity: 0.8; } }
+        .ticker-bar { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 8px 12px; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 18px; backdrop-filter: blur(10px); }
+        .ticker-item span { color: var(--text-main); font-weight: 700; }
+        .hero-box { background: var(--card-bg); border: 1px solid var(--border-glow); border-radius: 20px; padding: 18px 20px; margin-bottom: 16px; backdrop-filter: blur(16px); position: relative; overflow: hidden; }
+        .hero-title { font-size: 21px; font-weight: 800; line-height: 1.3; letter-spacing: -0.5px; margin-bottom: 8px; background: linear-gradient(135deg, #ffffff 30%, #6ee7b7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+        .swap-card { background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 18px; backdrop-filter: blur(20px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); position: relative; }
+        .input-group { background: rgba(11, 15, 25, 0.65); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 16px; padding: 14px; transition: all 0.3s ease; }
+        .input-group:focus-within { border-color: var(--primary-accent); box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+        .input-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .input-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .amount-input { background: transparent; border: none; color: var(--text-main); font-size: 22px; font-weight: 700; width: 55%; outline: none; }
+        .currency-selector { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 7px; color: var(--text-main); font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .currency-selector:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.14); }
+        .currency-selector.usdt-fixed { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399; cursor: default; }
+        .currency-name-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: right; }
+        .switch-wrapper { display: flex; justify-content: center; margin: -10px 0; position: relative; z-index: 2; }
+        .switch-btn { width: 40px; height: 40px; background: #1e293b; border: 2px solid var(--bg-color); border-radius: 50%; color: var(--primary-accent); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .switch-btn:hover { transform: rotate(180deg); background: var(--primary-accent); color: white; }
+        .rate-info-box { background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 10px 12px; margin: 14px 0; font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
+        .rate-info-box strong { color: var(--text-main); }
+        .cta-button { width: 100%; background: var(--primary-gradient); color: white; border: none; border-radius: 16px; padding: 16px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .cta-button:active { transform: scale(0.98); }
+        .trust-footer { margin-top: 18px; text-align: center; font-size: 11px; color: var(--text-muted); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 100; display: none; justify-content: center; align-items: flex-end; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { width: 100%; max-width: 430px; height: 82vh; background: #111827; border-top: 1px solid rgba(255, 255, 255, 0.15); border-radius: 24px 24px 0 0; padding: 20px 16px; display: flex; flex-direction: column; animation: slideUp 0.25s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .modal-header h3 { font-size: 16px; font-weight: 700; }
+        .close-modal { background: rgba(255, 255, 255, 0.1); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
+        .search-box { position: relative; margin-bottom: 14px; }
+        .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-input { width: 100%; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 14px 12px 38px; color: #fff; font-size: 14px; outline: none; }
+        .search-input:focus { border-color: var(--primary-accent); }
+        .currency-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; }
+        .currency-list::-webkit-scrollbar { width: 4px; }
+        .currency-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .currency-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.02); cursor: pointer; transition: background 0.2s; border: 1px solid transparent; }
+        .currency-item:hover, .currency-item.selected { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .curr-left { display: flex; align-items: center; gap: 12px; }
+        .curr-flag { font-size: 22px; }
+        .curr-code { font-weight: 700; font-size: 14px; color: #fff; }
+        .curr-name { font-size: 12px; color: var(--text-muted); }
+        .curr-rate { font-size: 12px; color: var(--primary-accent); font-weight: 600; }
+    </style>
 </head>
 <body>
-  <div id="root"></div>
-  <noscript>Enable JavaScript to view this demo. 请启用 JavaScript 查看本页。</noscript>
-  <script type="module" src="/src/main.jsx"></script>
+    <div class="mobile-container">
+        <header>
+            <div class="brand">
+                <div class="brand-logo">₮</div>
+                <div class="brand-text">
+                    <h1>GlobalX USDT</h1>
+                    <p>150+ Global Fiat Currencies</p>
+                </div>
+            </div>
+            <div class="badge-live">USDT ANCHORED</div>
+        </header>
+        <div class="ticker-bar">
+            <div class="ticker-item">1 USDT ≈ <span>1.00 USD</span></div>
+            <div class="ticker-item">1 USDT ≈ <span>7.24 CNY</span></div>
+            <div class="ticker-item">1 USDT ≈ <span>4.47 MYR</span></div>
+        </div>
+        <div class="hero-box">
+            <h2 class="hero-title">Any Legal Currency on Earth to USDT.</h2>
+            <p class="hero-desc">Instant global fiat-to-USDT liquidity. Supporting 150+ sovereign currencies with zero friction and instant settlement.</p>
+        </div>
+        <div class="swap-card">
+            <div class="input-group" id="topGroup">
+                <div class="input-label">
+                    <span id="topLabel">YOU PAY (LOCAL FIAT)</span>
+                    <span>GLOBAL RATE</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="topInput" class="amount-input" value="1000" inputmode="decimal">
+                    <div id="topSelector" class="currency-selector" onclick="openCurrencyModal()">
+                        <span id="topFlag">🇺🇸</span>
+                        <span id="topCode">USD</span>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>
+                    </div>
+                </div>
+                <div class="currency-name-sub" id="topFullName">United States Dollar</div>
+            </div>
+            <div class="switch-wrapper">
+                <div class="switch-btn" onclick="toggleDirection()" title="Switch Direction">
+                    <i class="fa-solid fa-arrow-right-arrow-left fa-rotate-90"></i>
+                </div>
+            </div>
+            <div class="input-group" id="bottomGroup">
+                <div class="input-label">
+                    <span id="bottomLabel">YOU RECEIVE (USDT)</span>
+                    <span style="color: var(--primary-accent);">1:1 PEGGED</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="bottomInput" class="amount-input" style="color: var(--primary-accent);" value="1000.00" inputmode="decimal">
+                    <div id="bottomSelector" class="currency-selector usdt-fixed">
+                        <span id="bottomFlag">₮</span>
+                        <span id="bottomCode">USDT</span>
+                    </div>
+                </div>
+                <div class="currency-name-sub" id="bottomFullName">Tether USD (TRC20 / ERC20)</div>
+            </div>
+            <div class="rate-info-box">
+                <span>Exchange Rate</span>
+                <strong id="rateDisplay">1 USDT = 1.0000 USD</strong>
+            </div>
+            <button class="cta-button" onclick="alert('Proceeding to USDT Settlement...')">
+                <span>Swap to USDT Instantly</span>
+                <i class="fa-solid fa-bolt"></i>
+            </button>
+        </div>
+        <div class="trust-footer">
+            <span>Supports All ISO 4217 Legal Sovereign Currencies Worldwide</span>
+        </div>
+    </div>
+    <div class="modal-overlay" id="currencyModal" onclick="closeModalOnBg(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Global Currency (150+)</h3>
+                <button class="close-modal" onclick="closeCurrencyModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="currencySearch" class="search-input" placeholder="Search country, code (e.g. CNY, MYR, KZT, NGN)..." oninput="filterCurrencies()">
+            </div>
+            <div class="currency-list" id="currencyListContainer"></div>
+        </div>
+    </div>
+    <script>
+        const globalCurrencies = [
+            { code: "USD", name: "United States Dollar (美元)", flag: "🇺🇸", rate: 1.00 },
+            { code: "CNY", name: "Chinese Yuan (人民币)", flag: "🇨🇳", rate: 7.24 },
+            { code: "MYR", name: "Malaysian Ringgit (马来西亚林吉特)", flag: "🇲🇾", rate: 4.47 },
+            { code: "EUR", name: "Euro (欧元)", flag: "🇪🇺", rate: 0.92 },
+            { code: "GBP", name: "British Pound (英镑)", flag: "🇬🇧", rate: 0.79 },
+            { code: "JPY", name: "Japanese Yen (日元)", flag: "🇯🇵", rate: 154.20 },
+            { code: "KRW", name: "South Korean Won (韩元)", flag: "🇰🇷", rate: 1395.00 },
+            { code: "SGD", name: "Singapore Dollar (新加坡元)", flag: "🇸🇬", rate: 1.34 },
+            { code: "HKD", name: "Hong Kong Dollar (港币)", flag: "🇭🇰", rate: 7.78 },
+            { code: "TWD", name: "New Taiwan Dollar (新台币)", flag: "🇹🇼", rate: 32.45 },
+            { code: "THB", name: "Thai Baht (泰铢)", flag: "🇹🇭", rate: 34.60 },
+            { code: "VND", name: "Vietnamese Dong (越南盾)", flag: "🇻🇳", rate: 25400.00 },
+            { code: "IDR", name: "Indonesian Rupiah (印尼盾)", flag: "🇮🇩", rate: 15850.00 },
+            { code: "PHP", name: "Philippine Peso (菲律宾比索)", flag: "🇵🇭", rate: 58.70 },
+            { code: "INR", name: "Indian Rupee (印度卢比)", flag: "🇮🇳", rate: 84.40 },
+            { code: "AED", name: "UAE Dirham (阿联酋迪拉姆)", flag: "🇦🇪", rate: 3.67 },
+            { code: "SAR", name: "Saudi Riyal (沙特里亚尔)", flag: "🇸🇦", rate: 3.75 },
+            { code: "AUD", name: "Australian Dollar (澳元)", flag: "🇦🇺", rate: 1.54 },
+            { code: "CAD", name: "Canadian Dollar (加元)", flag: "🇨🇦", rate: 1.40 },
+            { code: "CHF", name: "Swiss Franc (瑞士法郎)", flag: "🇨🇭", rate: 0.88 },
+            { code: "NZD", name: "New Zealand Dollar (新西兰元)", flag: "🇳🇿", rate: 1.69 },
+            { code: "RUB", name: "Russian Ruble (俄罗斯卢布)", flag: "🇷🇺", rate: 98.50 },
+            { code: "TRY", name: "Turkish Lira (土耳其里拉)", flag: "🇹🇷", rate: 34.35 },
+            { code: "BRL", name: "Brazilian Real (巴西雷亚尔)", flag: "🇧🇷", rate: 5.78 },
+            { code: "MXN", name: "Mexican Peso (墨西哥比索)", flag: "🇲🇽", rate: 20.35 },
+            { code: "ZAR", name: "South African Rand (南非兰特)", flag: "🇿🇦", rate: 18.15 },
+            { code: "NGN", name: "Nigerian Naira (尼日利亚奈拉)", flag: "🇳🇬", rate: 1680.00 },
+            { code: "KES", name: "Kenyan Shilling (肯尼亚先令)", flag: "🇰🇪", rate: 129.00 },
+            { code: "EGP", name: "Egyptian Pound (埃及镑)", flag: "🇪🇬", rate: 49.30 },
+            { code: "PKR", name: "Pakistani Rupee (巴基斯坦卢比)", flag: "🇵🇰", rate: 277.80 },
+            { code: "BDT", name: "Bangladeshi Taka (孟加拉塔卡)", flag: "🇧🇩", rate: 119.50 },
+            { code: "KZT", name: "Kazakhstani Tenge (哈萨克斯坦坚戈)", flag: "🇰🇿", rate: 495.00 },
+            { code: "UZS", name: "Uzbekistani Som (乌兹别克斯坦苏姆)", flag: "🇺🇿", rate: 12800.00 },
+            { code: "UAH", name: "Ukrainian Hryvnia (乌克兰格里夫纳)", flag: "🇺🇦", rate: 41.30 },
+            { code: "PLN", name: "Polish Zloty (波兰兹罗提)", flag: "🇵🇱", rate: 4.08 },
+            { code: "SEK", name: "Swedish Krona (瑞典克朗)", flag: "🇸🇪", rate: 10.95 },
+            { code: "NOK", name: "Norwegian Krone (挪威克朗)", flag: "🇳🇴", rate: 11.05 },
+            { code: "DKK", name: "Danish Krone (丹麦克朗)", flag: "🇩🇰", rate: 6.88 },
+            { code: "CZK", name: "Czech Koruna (捷克克朗)", flag: "🇨🇿", rate: 23.80 },
+            { code: "HUF", name: "Hungarian Forint (匈牙利福林)", flag: "🇭🇺", rate: 385.00 },
+            { code: "RON", name: "Romanian Leu (罗马尼亚列伊)", flag: "🇷🇴", rate: 4.60 },
+            { code: "ILS", name: "Israeli New Shekel (以色列新谢克尔)", flag: "🇮🇱", rate: 3.74 },
+            { code: "QAR", name: "Qatari Riyal (卡塔尔里亚尔)", flag: "🇶🇦", rate: 3.64 },
+            { code: "KWD", name: "Kuwaiti Dinar (科威特第纳尔)", flag: "🇰🇼", rate: 0.31 },
+            { code: "BHD", name: "Bahraini Dinar (巴林第纳尔)", flag: "🇧🇭", rate: 0.38 },
+            { code: "OMR", name: "Omani Rial (阿曼里亚尔)", flag: "🇴🇲", rate: 0.38 },
+            { code: "JOD", name: "Jordanian Dinar (约旦第纳尔)", flag: "🇯🇴", rate: 0.71 },
+            { code: "ARS", name: "Argentine Peso (阿根廷比索)", flag: "🇦🇷", rate: 998.00 },
+            { code: "CLP", name: "Chilean Peso (智利比索)", flag: "🇨🇱", rate: 975.00 },
+            { code: "COP", name: "Colombian Peso (哥伦比亚比索)", flag: "🇨🇴", rate: 4410.00 },
+            { code: "PEN", name: "Peruvian Sol (秘鲁索尔)", flag: "🇵🇪", rate: 3.78 },
+            { code: "VES", name: "Venezuelan Bolívar (委内瑞拉玻利瓦尔)", flag: "🇻🇪", rate: 45.20 },
+            { code: "UYU", name: "Uruguayan Peso (乌拉圭比索)", flag: "🇺🇾", rate: 42.10 },
+            { code: "BOB", name: "Bolivian Boliviano (玻利维亚诺)", flag: "🇧🇴", rate: 6.91 },
+            { code: "PYG", name: "Paraguayan Guarani (巴拉圭瓜拉尼)", flag: "🇵🇾", rate: 7780.00 },
+            { code: "CRC", name: "Costa Rican Colón (哥斯达黎加科朗)", flag: "🇨🇷", rate: 512.00 },
+            { code: "DOP", name: "Dominican Peso (多米尼加比索)", flag: "🇩🇴", rate: 60.20 },
+            { code: "GTQ", name: "Guatemalan Quetzal (危地马拉格查尔)", flag: "🇬🇹", rate: 7.72 },
+            { code: "HNL", name: "Honduran Lempira (洪都拉斯伦皮拉)", flag: "🇭🇳", rate: 25.15 },
+            { code: "NIO", name: "Nicaraguan Córdoba (尼加拉瓜科多巴)", flag: "🇳🇮", rate: 36.80 },
+            { code: "PAB", name: "Panamanian Balboa (巴拿马巴波亚)", flag: "🇵🇦", rate: 1.00 },
+            { code: "JMD", name: "Jamaican Dollar (牙买加元)", flag: "🇯🇲", rate: 158.00 },
+            { code: "TTD", name: "Trinidad & Tobago Dollar (特立尼达和多巴哥元)", flag: "🇹🇹", rate: 6.78 },
+            { code: "BBD", name: "Barbadian Dollar (巴巴多斯元)", flag: "🇧🇧", rate: 2.00 },
+            { code: "BSD", name: "Bahamian Dollar (巴哈马元)", flag: "🇧🇸", rate: 1.00 },
+            { code: "BZD", name: "Belize Dollar (伯利兹元)", flag: "🇧🇿", rate: 2.00 },
+            { code: "GYD", name: "Guyanese Dollar (圭亚那元)", flag: "🇬🇾", rate: 209.00 },
+            { code: "SRD", name: "Surinamese Dollar (苏里南元)", flag: "🇸🇷", rate: 35.40 },
+            { code: "ISK", name: "Icelandic Króna (冰岛克朗)", flag: "🇮🇸", rate: 138.00 },
+            { code: "RSD", name: "Serbian Dinar (塞尔维亚第纳尔)", flag: "🇷🇸", rate: 108.50 },
+            { code: "BGN", name: "Bulgarian Lev (保加利亚列弗)", flag: "🇧🇬", rate: 1.80 },
+            { code: "ALL", name: "Albanian Lek (阿尔巴尼亚列克)", flag: "🇦🇱", rate: 91.50 },
+            { code: "MKD", name: "Macedonian Denar (北马其顿第纳尔)", flag: "🇲🇰", rate: 56.80 },
+            { code: "BAM", name: "Bosnia-Herzegovina Mark (波黑可兑换马克)", flag: "🇧🇦", rate: 1.80 },
+            { code: "MDL", name: "Moldovan Leu (摩尔多瓦列伊)", flag: "🇲🇩", rate: 18.10 },
+            { code: "GEL", name: "Georgian Lari (格鲁吉亚拉里)", flag: "🇬🇪", rate: 2.73 },
+            { code: "AMD", name: "Armenian Dram (亚美尼亚德拉姆)", flag: "🇦🇲", rate: 387.00 },
+            { code: "AZN", name: "Azerbaijani Manat (阿塞拜疆马纳特)", flag: "🇦🇿", rate: 1.70 },
+            { code: "BYN", name: "Belarusian Ruble (白俄罗斯卢布)", flag: "🇧🇾", rate: 3.28 },
+            { code: "KGS", name: "Kyrgystani Som (吉尔吉斯斯坦索姆)", flag: "🇰🇬", rate: 86.40 },
+            { code: "TJS", name: "Tajikistani Somoni (塔吉克斯坦索莫尼)", flag: "🇹🇯", rate: 10.65 },
+            { code: "TMT", name: "Turkmenistani Manat (土库曼斯坦马纳特)", flag: "🇹🇲", rate: 3.50 },
+            { code: "MNT", name: "Mongolian Tugrik (蒙古图格里克)", flag: "🇲🇳", rate: 3410.00 },
+            { code: "KHR", name: "Cambodian Riel (柬埔寨瑞尔)", flag: "🇰🇭", rate: 4065.00 },
+            { code: "LAK", name: "Lao Kip (老挝基普)", flag: "🇱🇦", rate: 21900.00 },
+            { code: "MMK", name: "Myanmar Kyat (缅甸元)", flag: "🇲🇲", rate: 2100.00 },
+            { code: "BND", name: "Brunei Dollar (文莱元)", flag: "🇧🇳", rate: 1.34 },
+            { code: "NPR", name: "Nepalese Rupee (尼泊尔卢比)", flag: "🇳🇵", rate: 135.00 },
+            { code: "LKR", name: "Sri Lankan Rupee (斯里兰卡卢比)", flag: "🇱🇰", rate: 292.00 },
+            { code: "MVR", name: "Maldivian Rufiyaa (马尔代夫拉菲亚)", flag: "🇲🇻", rate: 15.40 },
+            { code: "BTN", name: "Bhutanese Ngultrum (不丹努扎姆)", flag: "🇧🇹", rate: 84.40 },
+            { code: "AFN", name: "Afghan Afghani (阿富汗尼)", flag: "🇦🇫", rate: 68.00 },
+            { code: "IQD", name: "Iraqi Dinar (伊拉克第纳尔)", flag: "🇮🇶", rate: 1310.00 },
+            { code: "IRR", name: "Iranian Rial (伊朗里亚尔)", flag: "🇮🇷", rate: 42100.00 },
+            { code: "LBP", name: "Lebanese Pound (黎巴嫩镑)", flag: "🇱🇧", rate: 89500.00 },
+            { code: "SYP", name: "Syrian Pound (叙利亚镑)", flag: "🇸🇾", rate: 13000.00 },
+            { code: "YER", name: "Yemeni Rial (也门里亚尔)", flag: "🇾🇪", rate: 250.00 },
+            { code: "MAD", name: "Moroccan Dirham (摩洛哥迪拉姆)", flag: "🇲🇦", rate: 9.95 },
+            { code: "DZD", name: "Algerian Dinar (阿尔及利亚第纳尔)", flag: "🇩🇿", rate: 133.50 },
+            { code: "TND", name: "Tunisian Dinar (突尼斯第纳尔)", flag: "🇹🇳", rate: 3.12 },
+            { code: "LYD", name: "Libyan Dinar (利比亚第纳尔)", flag: "🇱🇾", rate: 4.85 },
+            { code: "GHS", name: "Ghanaian Cedi (加纳塞地)", flag: "🇬🇭", rate: 16.10 },
+            { code: "ETB", name: "Ethiopian Birr (埃塞俄比亚比尔)", flag: "🇪🇹", rate: 122.00 },
+            { code: "TZS", name: "Tanzanian Shilling (坦桑尼亚先令)", flag: "🇹🇿", rate: 2680.00 },
+            { code: "UGX", name: "Ugandan Shilling (乌干达先令)", flag: "🇺🇬", rate: 3670.00 },
+            { code: "RWF", name: "Rwandan Franc (卢旺达法郎)", flag: "🇷🇼", rate: 1365.00 },
+            { code: "ZMW", name: "Zambian Kwacha (赞比亚克瓦查)", flag: "🇿🇲", rate: 27.10 },
+            { code: "BWP", name: "Botswanan Pula (博茨瓦纳普拉)", flag: "🇧🇼", rate: 13.60 },
+            { code: "NAD", name: "Namibian Dollar (纳米比亚元)", flag: "🇳🇦", rate: 18.15 },
+            { code: "MUR", name: "Mauritian Rupee (毛里求斯卢比)", flag: "🇲🇺", rate: 46.50 },
+            { code: "SCR", name: "Seychellois Rupee (塞舌尔卢比)", flag: "🇸🇨", rate: 13.80 },
+            { code: "MZN", name: "Mozambican Metical (莫桑比克梅蒂卡尔)", flag: "🇲🇿", rate: 63.90 },
+            { code: "AOA", name: "Angolan Kwanza (安哥拉宽扎)", flag: "🇦🇴", rate: 912.00 },
+            { code: "XOF", name: "West African CFA Franc (西非法郎)", flag: "🇸🇳", rate: 605.00 },
+            { code: "XAF", name: "Central African CFA Franc (中非法郎)", flag: "🇨🇲", rate: 605.00 },
+            { code: "CDF", name: "Congolese Franc (刚果法郎)", flag: "🇨🇩", rate: 2850.00 },
+            { code: "MGA", name: "Malagasy Ariary (马达加斯加阿里亚里)", flag: "🇲🇬", rate: 4620.00 },
+            { code: "MWK", name: "Malawian Kwacha (马拉维克瓦查)", flag: "🇲🇼", rate: 1735.00 },
+            { code: "GMD", name: "Gambian Dalasi (冈比亚达拉西)", flag: "🇬🇲", rate: 71.00 },
+            { code: "SLL", name: "Sierra Leonean Leone (塞拉利昂利昂)", flag: "🇸🇱", rate: 22.60 },
+            { code: "LRD", name: "Liberian Dollar (利比里亚元)", flag: "🇱🇷", rate: 192.00 },
+            { code: "GNF", name: "Guinean Franc (几内亚法郎)", flag: "🇬🇳", rate: 8600.00 },
+            { code: "CVE", name: "Cape Verdean Escudo (佛得角埃斯库多)", flag: "🇨🇻", rate: 101.50 },
+            { code: "DJF", name: "Djiboutian Franc (吉布提法郎)", flag: "🇩🇯", rate: 177.70 },
+            { code: "ERN", name: "Eritrean Nakfa (厄立特里亚纳克法)", flag: "🇪🇷", rate: 15.00 },
+            { code: "SOS", name: "Somali Shilling (索马里先令)", flag: "🇸🇴", rate: 571.00 },
+            { code: "SDG", name: "Sudanese Pound (苏丹镑)", flag: "🇸🇩", rate: 601.00 },
+            { code: "SSP", name: "South Sudanese Pound (南苏丹镑)", flag: "🇸🇸", rate: 3300.00 },
+            { code: "BIF", name: "Burundian Franc (布隆迪法郎)", flag: "🇧🇮", rate: 2910.00 },
+            { code: "KMF", name: "Comorian Franc (科摩罗法郎)", flag: "🇰🇲", rate: 454.00 },
+            { code: "SZL", name: "Swazi Lilangeni (斯威士兰里兰吉尼)", flag: "🇸🇿", rate: 18.15 },
+            { code: "LSL", name: "Lesotho Loti (莱索托洛蒂)", flag: "🇱🇸", rate: 18.15 },
+            { code: "MRU", name: "Mauritanian Ouguiya (毛里塔尼亚乌吉亚)", flag: "🇲🇷", rate: 39.80 },
+            { code: "STN", name: "São Tomé & Príncipe Dobra (圣多美多布拉)", flag: "🇸🇹", rate: 22.60 },
+            { code: "FJD", name: "Fijian Dollar (斐济元)", flag: "🇫🇯", rate: 2.27 },
+            { code: "PGK", name: "Papua New Guinean Kina (巴布亚新几内亚基那)", flag: "🇵🇬", rate: 4.02 },
+            { code: "SBD", name: "Solomon Islands Dollar (所罗门群岛元)", flag: "🇸🇧", rate: 8.45 },
+            { code: "VUV", name: "Vanuatu Vatu (瓦努阿图瓦图)", flag: "🇻🇺", rate: 120.50 },
+            { code: "WST", name: "Samoan Tala (萨摩亚塔拉)", flag: "🇼🇸", rate: 2.78 },
+            { code: "TOP", name: "Tongan Paʻanga (汤加潘加)", flag: "🇹🇴", rate: 2.38 },
+            { code: "XPF", name: "CFP Franc (太平洋法郎)", flag: "🇵🇫", rate: 110.20 },
+            { code: "HTG", name: "Haitian Gourde (海地古德)", flag: "🇭🇹", rate: 131.50 },
+            { code: "CUP", name: "Cuban Peso (古巴比索)", flag: "🇨🇺", rate: 24.00 },
+            { code: "AWG", name: "Aruban Florin (阿鲁巴弗罗林)", flag: "🇦🇼", rate: 1.79 },
+            { code: "ANG", name: "Netherlands Antillean Guilder (荷属安的列斯盾)", flag: "🇨🇼", rate: 1.79 },
+            { code: "BMD", name: "Bermudian Dollar (百慕大元)", flag: "🇧🇲", rate: 1.00 },
+            { code: "KYD", name: "Cayman Islands Dollar (开曼群岛元)", flag: "🇰🇾", rate: 0.83 },
+            { code: "XCD", name: "East Caribbean Dollar (东加勒比元)", flag: "🇦🇬", rate: 2.70 },
+            { code: "FKP", name: "Falkland Islands Pound (福克兰群岛镑)", flag: "🇫🇰", rate: 0.79 },
+            { code: "GIP", name: "Gibraltar Pound (直布罗陀镑)", flag: "🇬🇮", rate: 0.79 },
+            { code: "SHP", name: "Saint Helena Pound (圣赫勒拿镑)", flag: "🇸🇭", rate: 0.79 },
+            { code: "ZWG", name: "Zimbabwe Gold (津巴布韦金)", flag: "🇿🇼", rate: 25.50 }
+        ];
+        let selectedFiat = globalCurrencies[0];
+        let isFiatToUsdt = true;
+        const topInput = document.getElementById('topInput');
+        const bottomInput = document.getElementById('bottomInput');
+        function renderCurrencyList(list) {
+            const container = document.getElementById('currencyListContainer');
+            container.innerHTML = '';
+            list.forEach(curr => {
+                const item = document.createElement('div');
+                item.className = 'currency-item' + (curr.code === selectedFiat.code ? ' selected' : '');
+                item.onclick = () => selectCurrency(curr);
+                item.innerHTML = '<div class="curr-left"><span class="curr-flag">' + curr.flag + '</span><div><div class="curr-code">' + curr.code + '</div><div class="curr-name">' + curr.name + '</div></div></div><div class="curr-rate">1 USDT ≈ ' + curr.rate + '</div>';
+                container.appendChild(item);
+            });
+        }
+        function filterCurrencies() {
+            const query = document.getElementById('currencySearch').value.toLowerCase().trim();
+            renderCurrencyList(globalCurrencies.filter(c => c.code.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)));
+        }
+        function selectCurrency(curr) { selectedFiat = curr; updateUIHeaders(); calculateFromTop(); closeCurrencyModal(); }
+        function updateUIHeaders() {
+            const topSelector = document.getElementById('topSelector');
+            const bottomSelector = document.getElementById('bottomSelector');
+            if (isFiatToUsdt) {
+                document.getElementById('topLabel').innerText = "YOU PAY (LOCAL FIAT)";
+                document.getElementById('bottomLabel').innerText = "YOU RECEIVE (USDT)";
+                topSelector.className = "currency-selector";
+                topSelector.onclick = openCurrencyModal;
+                topSelector.innerHTML = '<span>' + selectedFiat.flag + '</span><span>' + selectedFiat.code + '</span><i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>';
+                document.getElementById('topFullName').innerText = selectedFiat.name;
+                bottomSelector.className = "currency-selector usdt-fixed";
+                bottomSelector.onclick = null;
+                bottomSelector.innerHTML = '<span>₮</span><span>USDT</span>';
+                document.getElementById('bottomFullName').innerText = "Tether USD (TRC20 / ERC20)";
+            } else {
+                document.getElementById('topLabel').innerText = "YOU SEND (USDT)";
+                document.getElementById('bottomLabel').innerText = "YOU RECEIVE (LOCAL FIAT)";
+                topSelector.className = "currency-selector usdt-fixed";
+                topSelector.onclick = null;
+                topSelector.innerHTML = '<span>₮</span><span>USDT</span>';
+                document.getElementById('topFullName').innerText = "Tether USD (TRC20 / ERC20)";
+                bottomSelector.className = "currency-selector";
+                bottomSelector.onclick = openCurrencyModal;
+                bottomSelector.innerHTML = '<span>' + selectedFiat.flag + '</span><span>' + selectedFiat.code + '</span><i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>';
+                document.getElementById('bottomFullName').innerText = selectedFiat.name;
+            }
+            document.getElementById('rateDisplay').innerText = '1 USDT = ' + selectedFiat.rate + ' ' + selectedFiat.code;
+        }
+        function calculateFromTop() {
+            const val = parseFloat(topInput.value);
+            if (isNaN(val) || val < 0) { bottomInput.value = ''; return; }
+            bottomInput.value = (isFiatToUsdt ? val / selectedFiat.rate : val * selectedFiat.rate).toFixed(2);
+        }
+        function calculateFromBottom() {
+            const val = parseFloat(bottomInput.value);
+            if (isNaN(val) || val < 0) { topInput.value = ''; return; }
+            topInput.value = (isFiatToUsdt ? val * selectedFiat.rate : val / selectedFiat.rate).toFixed(2);
+        }
+        function toggleDirection() { isFiatToUsdt = !isFiatToUsdt; updateUIHeaders(); calculateFromTop(); }
+        function openCurrencyModal() {
+            document.getElementById('currencySearch').value = '';
+            renderCurrencyList(globalCurrencies);
+            document.getElementById('currencyModal').classList.add('active');
+            setTimeout(() => document.getElementById('currencySearch').focus(), 100);
+        }
+        function closeCurrencyModal() { document.getElementById('currencyModal').classList.remove('active'); }
+        function closeModalOnBg(e) { if (e.target.id === 'currencyModal') closeCurrencyModal(); }
+        topInput.addEventListener('input', calculateFromTop);
+        bottomInput.addEventListener('input', calculateFromBottom);
+        updateUIHeaders();
+        calculateFromTop();
+    </script>
 </body>
 </html>
